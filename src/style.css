@@ -12,3 +12,19 @@ body {
     height:250px;
     width:250px;
 }
+#forcast-holder {
+    display:flex;
+    flex-direction: row;
+    background-color: rgb(127, 197, 255);
+    gap:10px;
+    width:fit-content;
+}
+
+.daycard {
+    background-color: aqua;
+    height:100px;
+    width:100px;
+    display:flex;
+    flex-direction: column;
+    
+}

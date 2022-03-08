@@ -19,7 +19,13 @@
   },
   "homepage": "https://github.com/sbusenba/odin-weather-app#readme",
   "dependencies": {
+    "date-fns": "^2.28.0",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
   }
 }
