@@ -16,8 +16,8 @@ function downloadImage(response) {
 
 function setForcast(weatherData) {
   for (let i = 0; i < 8; i += 1) {
-    document.querySelector(`#day${i}maxtemp`).textContent = weatherData.daily[i].temp.max;
-    document.querySelector(`#day${i}mintemp`).textContent = weatherData.daily[i].temp.min;
+    document.querySelector(`#day${i}maxtemp`).textContent = `${weatherData.daily[i].temp.max}°`;
+    document.querySelector(`#day${i}mintemp`).textContent = `${weatherData.daily[i].temp.min}°`;
 
     const date = new Date(weatherData.daily[i].dt * 1000);
     if (i < 1) {
