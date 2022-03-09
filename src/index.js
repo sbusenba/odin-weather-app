@@ -16,8 +16,8 @@ function downloadImage(response) {
 
 function setForcast(weatherData) {
   for (let i = 0; i < 8; i += 1) {
-    document.querySelector(`#day${i}maxtemp`).textContent = `${weatherData.daily[i].temp.max}°`;
-    document.querySelector(`#day${i}mintemp`).textContent = `${weatherData.daily[i].temp.min}°`;
+    document.querySelector(`#day${i}maxtemp`).textContent = `High: ${weatherData.daily[i].temp.max}°`;
+    document.querySelector(`#day${i}mintemp`).textContent = `Low: ${weatherData.daily[i].temp.min}°`;
 
     const date = new Date(weatherData.daily[i].dt * 1000);
     if (i < 1) {
@@ -28,6 +28,8 @@ function setForcast(weatherData) {
     forcastBar.style.opacity = 1;
     icon.style.opacity = 1;
     display.style.opacity = 1;
+    const iconCode = weatherData.daily[i].weather[0].icon;
+    document.querySelector(`#forcast-day${i}`).style['background-image'] = `url(http://openweathermap.org/img/wn/${iconCode}@2x.png)`;
   }
 }
 
