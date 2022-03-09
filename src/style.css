@@ -7,15 +7,37 @@ body {
     width:30px;
     border-radius: 15px;
 }
+#input-div{
+    display:flex;
+    flex-direction:row;
+    gap:30px;
+}
+.units{
+    background-color: darkblue;
+    height:30px;
+    width:60px;
+    border-radius: 15px;
+    display:flex;
+}
+.selector {
+    background-color: blue;
+    height:30px;
+    width:30px;
+    border-radius: 15px;
+    color:aliceblue;
+    align-items: center;
+    justify-content:center;
+    display:flex;
+}
 #icon-display{
     background-color: blue;
     height:250px;
     width:250px;
+    border-radius: 10px;
 }
 #forcast-holder { 
     display:flex;
     flex-direction: row;
-    align-items: space-between;
     justify-content: space-between;
     background-color:dimgrey;
     background-color: rgb(212, 142, 56);

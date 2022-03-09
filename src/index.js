@@ -3,8 +3,12 @@ const input = document.querySelector('#search-text');
 const button = document.querySelector('#search-button');
 const icon = document.querySelector('#icon-display');
 const forcastBar = document.querySelector('#forcast-holder');
-const todayDisplay = document.querySelector('#today-display');
+const switcher = document.querySelector('.units');
+const selector = document.querySelector('.selector');
+// const todayDisplay = document.querySelector('#today-display');
 const display = document.querySelector('#display');
+let units = 'imperial';
+
 function downloadImage(response) {
   const iconCode = response.weather[0].icon;
   icon.setAttribute('src', `http://openweathermap.org/img/wn/${iconCode}@4x.png`);
@@ -16,7 +20,11 @@ function setForcast(weatherData) {
     document.querySelector(`#day${i}mintemp`).textContent = weatherData.daily[i].temp.min;
 
     const date = new Date(weatherData.daily[i].dt * 1000);
-    document.querySelector(`#day${i}day`).textContent = date.toLocaleString('en-US', { weekday: 'long' });
+    if (i < 1) {
+      document.querySelector(`#day${i}day`).textContent = 'Later';
+    } else {
+      document.querySelector(`#day${i}day`).textContent = date.toLocaleString('en-US', { weekday: 'long' });
+    }
     forcastBar.style.opacity = 1;
     icon.style.opacity = 1;
     display.style.opacity = 1;
@@ -25,7 +33,7 @@ function setForcast(weatherData) {
 
 function getForecast(lon, lat) {
   fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`,
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=${units}&appid=${apiKey}`,
     { mode: 'cors' },
   ).then((response) => {
     if (response.status === 200) {
@@ -40,7 +48,7 @@ function getForecast(lon, lat) {
 }
 function getWeather() {
   fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&APPID=${apiKey}`,
+    `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&exclude=hourly,minutely&units=${units}&APPID=${apiKey}`,
     { mode: 'cors' },
   )
     .then((response) => {
@@ -54,5 +62,19 @@ function getWeather() {
       getForecast(response.coord.lon, response.coord.lat);
     });
 }
-
+function changeUnits() {
+  if (selector.textContent === 'F') {
+    selector.textContent = 'C';
+    switcher.style['justify-content'] = 'flex-end';
+    units = 'metric';
+  } else {
+    selector.textContent = 'F';
+    switcher.style['justify-content'] = 'flex-start';
+    units = 'imperial';
+  }
+  if (input.value != null) {
+    getWeather();
+  }
+}
 button.addEventListener('click', getWeather);
+switcher.addEventListener('click', changeUnits);
