@@ -7,6 +7,8 @@ const switcher = document.querySelector('.units');
 const selector = document.querySelector('.selector');
 // const todayDisplay = document.querySelector('#today-display');
 const display = document.querySelector('#display');
+const todayWeather = document.querySelector('.weather-info');
+const windicator = document.querySelector('#wind-indicator');
 let units = 'imperial';
 
 function downloadImage(response) {
@@ -59,9 +61,13 @@ function getWeather() {
       }
       return 'error';
     })
-    .then((response) => {
-      downloadImage(response);
-      getForecast(response.coord.lon, response.coord.lat);
+    .then((weatherData) => {
+      downloadImage(weatherData);
+      const { description } = weatherData.weather[0];
+      todayWeather.textContent = description;
+      console.log((weatherData.weather[0].wind_deg));
+      windicator.style.transform = `rotate(${(weatherData.wind.deg - 90)}deg)`;
+      getForecast(weatherData.coord.lon, weatherData.coord.lat);
     });
 }
 function changeUnits() {

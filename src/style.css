@@ -94,6 +94,9 @@ h1{
     line-height:1rem;
     
 }
+#wind-indicator{
+    transform:rotate(-90deg);
+}
 .daycard>div{
     display:flex;
 }
