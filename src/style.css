@@ -55,8 +55,8 @@ h1{
 #temp-disp{
     align-self: bottom left;
 }
-#weather-info{
-    font-size: larger;
+.weather-info{
+    font-size:xx-large;
 
 }
 #wind{
