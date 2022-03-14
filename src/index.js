@@ -9,6 +9,7 @@ const selector = document.querySelector('.selector');
 const display = document.querySelector('#display');
 const todayWeather = document.querySelector('.weather-info');
 const windicator = document.querySelector('#wind-indicator');
+const windSpeed = document.querySelector('#wind-speed');
 let units = 'imperial';
 
 function downloadImage(response) {
@@ -18,20 +19,22 @@ function downloadImage(response) {
 
 function setForcast(weatherData) {
   for (let i = 0; i < 8; i += 1) {
-    document.querySelector(`#day${i}maxtemp`).textContent = `High: ${weatherData.daily[i].temp.max}°`;
-    document.querySelector(`#day${i}mintemp`).textContent = `Low: ${weatherData.daily[i].temp.min}°`;
-
-    const date = new Date(weatherData.daily[i].dt * 1000);
-    if (i < 1) {
-      document.querySelector(`#day${i}day`).textContent = 'Later';
+    if (units === 'imperial') {
+      document.querySelector(`#day${i}maxtemp`).textContent = `High: ${Math.round(weatherData.daily[i].temp.max)}°F `;
+      document.querySelector(`#day${i}mintemp`).textContent = `Low: ${Math.round(weatherData.daily[i].temp.min)}°F `;
     } else {
+      document.querySelector(`#day${i}maxtemp`).textContent = `High: ${Math.round(weatherData.daily[i].temp.max)}°C `;
+      document.querySelector(`#day${i}mintemp`).textContent = `Low: ${Math.round(weatherData.daily[i].temp.min)}°C `;
+    }
+    const date = new Date(weatherData.daily[i].dt * 1000);
+    if (i >= 1) {
       document.querySelector(`#day${i}day`).textContent = date.toLocaleString('en-US', { weekday: 'long' });
+      const iconCode = weatherData.daily[i].weather[0].icon;
+      document.querySelector(`#forcast-day${i}`).style['background-image'] = `url(http://openweathermap.org/img/wn/${iconCode}@2x.png)`;
     }
     forcastBar.style.opacity = 1;
     icon.style.opacity = 1;
     display.style.opacity = 1;
-    const iconCode = weatherData.daily[i].weather[0].icon;
-    document.querySelector(`#forcast-day${i}`).style['background-image'] = `url(http://openweathermap.org/img/wn/${iconCode}@2x.png)`;
   }
 }
 
@@ -64,8 +67,13 @@ function getWeather() {
     .then((weatherData) => {
       downloadImage(weatherData);
       const { description } = weatherData.weather[0];
-      todayWeather.textContent = description;
+      todayWeather.textContent = `Today, expect ${description}.`;
       console.log((weatherData.weather[0].wind_deg));
+      if (units === 'imperial') {
+        windSpeed.textContent = `Wind speed: ${weatherData.wind.speed} mph`;
+      } else {
+        windSpeed.textContent = `Wind speed: ${weatherData.wind.speed} kph`;
+      }
       windicator.style.transform = `rotate(${(weatherData.wind.deg - 90)}deg)`;
       getForecast(weatherData.coord.lon, weatherData.coord.lat);
     });
