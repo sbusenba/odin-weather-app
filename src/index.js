@@ -1,3 +1,10 @@
+import './style.css'
+
+
+
+/* I am aware storing api keys on github is BAD.
+I have chosen to do it because this is a free key
+and obscuring it is beyond the scope of this assignment*/
 const apiKey = 'ce678a1ab136ef46871798383c6d8d08';
 const input = document.querySelector('#search-text');
 const button = document.querySelector('#search-button');
@@ -5,7 +12,6 @@ const icon = document.querySelector('#icon-display');
 const forcastBar = document.querySelector('#forcast-holder');
 const switcher = document.querySelector('.units');
 const selector = document.querySelector('.selector');
-// const todayDisplay = document.querySelector('#today-display');
 const display = document.querySelector('#display');
 const todayWeather = document.querySelector('.weather-info');
 const windicator = document.querySelector('#wind-indicator');
