@@ -98,5 +98,9 @@ function changeUnits() {
     getWeather();
   }
 }
+const keyPressed = (e)=>{
+console.log(e)
+}
 button.addEventListener('click', getWeather);
+input.addEventListener('keydown',keyPressed)
 switcher.addEventListener('click', changeUnits);
