@@ -3,6 +3,7 @@ body {
 }
 #search-button{
     background-color: blue;
+    color:aliceblue;
     height:30px;
     border-radius: 15px;
 }
