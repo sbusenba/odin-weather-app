@@ -99,7 +99,9 @@ function changeUnits() {
   }
 }
 const keyPressed = (e)=>{
-console.log(e)
+if (e.key === 'Enter'){
+  getWeather()
+}
 }
 button.addEventListener('click', getWeather);
 input.addEventListener('keydown',keyPressed)
